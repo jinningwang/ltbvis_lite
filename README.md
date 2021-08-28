@@ -32,8 +32,8 @@ LTBVIS Lite runs on **MATLAB R2021a**.
 
 * *name* should be consistent with `visdata`.
 
-### pre-load map
-The pre-load map is a world map from:
+### default map
+You can get the map from:
 <https://eoimages.gsfc.nasa.gov/images/imagerecords/73000/73751/world.topo.bathy.200407.3x21600x10800.jpg>
 
 ### video
@@ -60,6 +60,7 @@ createvideo('wecc_gps.csv', 'wecc_out.csv', 'worldmap.jpg', 'wecc.avi', true)
 ```
 
 After the program finished, your video is prepared in the same directory.
+(Due to the file size limitation, the map file is not uploaded here. You can get it from above link.)
 
 ## Citing LTB
 ```
