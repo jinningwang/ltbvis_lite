@@ -39,9 +39,6 @@ The pre-load map is a world map from:
 ### video
 The output will be a video file in avi format.
 
-### plz
-parallelization enable, 1 for enable and 0 for disable.
-
 ## function
 The main function is `createvide`, which takes five parameters.
 
