@@ -1,6 +1,8 @@
 # LTBVIS Lite
 
-LTBVIS lite version, a MATLAB 2D geographical visualization tool. It visualizes the data with geographical coordination on a 2D map and compiles the visualization results into a movie.
+LTBVIS lite version, a *standalone* and *lightweight* visualization tool.
+
+MATLAB 2D geographical visualization tool. It visualizes the data with geographical coordination on a 2D map and compiles the visualized results into a **movie**.
 
 ## Environment
 LTBVIS Lite runs on **MATLAB R2021a**.
