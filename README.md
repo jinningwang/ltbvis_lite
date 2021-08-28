@@ -32,12 +32,28 @@ LTBVIS Lite runs on MATLAB R2021a, and other versions have not beed tested.
 
 * *name* should be consistent with `visdata`.
 
-### map
-The predefined map is a world map from:
+### pre-load map
+The pre-load map is a world map from:
 <https://eoimages.gsfc.nasa.gov/images/imagerecords/73000/73751/world.topo.bathy.200407.3x21600x10800.jpg>
 
-### output
+### video
 The output will be a video file in avi format.
+
+### plz
+parallelization enable, 1 for enable and 0 for disable.
+
+## function
+The main function is `createvide`, which takes five parameters.
+
+```
+createvideo(coords, visdata, map, video, plz)
+```
+
+* `coords`: string, sites coordination csv file name.
+* `visdata`: string, visualized data csv file name.
+* `map`: string, base map file name.
+* `video`: string, output video file name.
+* `plz`: bool, parallelization enable.
 
 ## Tutorial
 In the LTBVIS Lite directory, run the command below:
