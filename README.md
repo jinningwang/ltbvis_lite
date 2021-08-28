@@ -9,6 +9,18 @@ LTBVIS Lite runs on **MATLAB R2021a**.
 
 ## I/O Format
 
+### coords
+`coords` are the sites coordination in csv format. Example file looks like:
+
+|  name  | xcoord  | ycoord |
+|  ----  | ----  | ---- |
+|  Site 1  |  100.1  |  99.9  |
+|  Site 2  | 99.8 | 97.6 |
+|...|...|...|...|...|...|
+|  Site N  | 96.5 | 93.4 |
+
+* *name* should be consistent with `visdata`.
+
 ### visdata
 `visdata` is time-series data in csv format. It contains the time stamp and data series on each location. Example file looks like:
 
@@ -21,18 +33,6 @@ LTBVIS Lite runs on **MATLAB R2021a**.
 
 * Location names should be consistent with the `coords`.
 * The time stamp column should be named as *time*.
- 
-### coords
-`coords` are the sites coordination in csv format. Example file looks like:
-
-|  name  | xcoord  | ycoord |
-|  ----  | ----  | ---- |
-|  Site 1  |  100.1  |  99.9  |
-|  Site 2  | 99.8 | 97.6 |
-|...|...|...|...|...|...|
-|  Site N  | 96.5 | 93.4 |
-
-* *name* should be consistent with `visdata`.
 
 ### default map
 You can get the map from:
