@@ -71,4 +71,5 @@ After the program finished, your video is prepared in the same directory.
 ```
 
 ## Contributors
-Nicholas West, Jinning Wang, Hantao Cui, Can Huang, Fangxing Li.
+Nicholas West, [Jinning Wang](https://github.com/jinningwang), [Hantao Cui](https://github.com/cuihantao), Can Huang, Fangxing Li.
+
