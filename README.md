@@ -41,7 +41,7 @@ You can get the map from:
 ### video
 The output will be a video file in avi format.
 
-## function
+## Function
 The main function is `createvide`, which takes five parameters.
 
 ```
