@@ -11,9 +11,10 @@ function createvideo(coords, visdata, map, video, plz)
     fprintf('Map file: [%s]\n', map)
     fprintf('Parallelization: [%s]\n', num2str(plz))
 
-    framerate = 30; % what is this? JW
+    framerate = 30; % fps (frames per second)
     padding = 100; % Measured in pixels
-    scale = 0.001; % what is this? JW
+    scale = 0.001; % data transformation range
+    
     interpolate_timestamps = false;
     interpolate_method = 'natural';
     extrapolate_method = 'none';
