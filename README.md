@@ -71,5 +71,5 @@ After the program finished, your video is prepared in the same directory.
 ```
 
 ## Contributors
-Nicholas West, [Jinning Wang](https://github.com/jinningwang), [Hantao Cui](https://github.com/cuihantao), Can Huang, Fangxing Li.
+[Nicholas West](https://github.com/TheHashTableSlasher), [Jinning Wang](https://github.com/jinningwang), [Hantao Cui](https://github.com/cuihantao), Can Huang, Fangxing Li.
 
