@@ -1,10 +1,9 @@
 function createvideo(coords, visdata, map, video, plz)
-
     %% program info
     % disp program info
     version = 'v1.1';
     fprintf('LTBVIS Lite \nVersion: [%s]\n', version)
-    
+
     % disp I/O info
     fprintf('\nCoordination data: [%s]\n', coords)
     fprintf('Visualized data: [%s]\n', visdata)
@@ -13,8 +12,8 @@ function createvideo(coords, visdata, map, video, plz)
 
     framerate = 30; % fps (frames per second)
     padding = 100; % Measured in pixels
-    scale = 0.001; % data transformation range
-    
+    scale = 0.0002; % data transformation range
+
     interpolate_timestamps = false;
     interpolate_method = 'natural';
     extrapolate_method = 'none';
@@ -35,7 +34,7 @@ function createvideo(coords, visdata, map, video, plz)
         x = xx;
     end
 
-    frames = length(x); 
+    frames = length(x);
 
     cs = (Y - 1 + scale) / (2 * scale);
     xs = gpstable{:, 'xcoord'};
@@ -44,7 +43,7 @@ function createvideo(coords, visdata, map, video, plz)
     % disp data info
     fprintf('\nData info\n')
     fprintf('There are %s sites, and %s time stamps.\n', num2str(size(xs, 1)), num2str(size(x, 1)))
-    
+
     %% calcualtion
     worldmap = imread(map);
     [height, width, ~] = size(worldmap);
@@ -61,16 +60,16 @@ function createvideo(coords, visdata, map, video, plz)
     [height, width, ~] = size(worldmap);
     xs = xs - xmin;
     ys = ys - ymin;
-    
+
     desired_ratio = max_resolution(2) / max_resolution(1);
     ratio = width / height;
-    
+
     if ratio < desired_ratio
         scale = max_resolution(1) / height;
     else
         scale = max_resolution(2) / width;
     end
-    
+
     worldmap = imresize(worldmap, scale);
     [height, width, ~] = size(worldmap);
     xs = xs * scale;
@@ -85,46 +84,48 @@ function createvideo(coords, visdata, map, video, plz)
     open(vw);
 
     F = scatteredInterpolant(ys, xs, zeros(length(xs), 1), interpolate_method, extrapolate_method);
+    blend = vision.AlphaBlender('Operation', 'Blend');
     ff = zeros(height, width);
 
     fprintf('\nCalculation done!\n')
-    
+
     %% video compilation
     bar = waitbar(0, 'video compiling...');
-            
-    for k = 1:frames
 
-        str=['video compiling...', num2str(fix(100 * k / frames)), '%'];
+    for k = 1:frames
+        str = ['video compiling... ', num2str(fix(100 * k / frames)), '%'];
         waitbar(k / frames, bar, str)
-        
+
         F.Values = cs(:, k);
 
-        % "parfor" is more efficient
+        % "parfor" is more efficient on multi-core systems
         if plz
-            
             parfor j = 1:width
                 ff(:, j) = F(1:height, repelem(j, height));
             end
-            
         else
-            
             for j = 1:width
                 ff(:, j) = F(1:height, repelem(j, height));
             end
-            
         end
 
         frame = ff;
+
+        frame(frame > 1) = 1;
+        frame(frame < 0) = 0;
         frame(isnan(frame)) = 0.5;
-        frame = ind2rgb(uint8(frame * 255), jet);
-        frame = imfuse(worldmap, frame, 'blend');
+
+        blend.Opacity = abs(frame - 0.5) * 0.75;
+
+        frame = im2uint8(ind2rgb(im2uint8(frame), jet));
+        frame = blend(worldmap, frame);
+        %frame = imfuse(worldmap, frame, 'blend');
 
         writeVideo(vw, frame);
-        
     end
+
     close(bar);
     close(vw);
-    
-    fprintf('Save video to : [%s] \n', video)
-    
+
+    fprintf('Save video to : [%s]\n', video)
 end
