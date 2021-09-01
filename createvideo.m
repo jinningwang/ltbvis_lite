@@ -13,6 +13,7 @@ function createvideo(coords, visdata, map, video, plz)
     framerate = 30; % fps (frames per second)
     padding = 100; % Measured in pixels
     scale = 0.0002; % data transformation range
+    bus_radius = 3; % in pixels
 
     interpolate_timestamps = false;
     interpolate_method = 'natural';
@@ -76,7 +77,7 @@ function createvideo(coords, visdata, map, video, plz)
     ys = ys * scale;
 
     for i = 1:length(xs)
-        worldmap = insertShape(worldmap, 'FilledCircle', [round(xs(i)) round(ys(i)) 8], 'Color', 'white');
+        worldmap = insertShape(worldmap, 'FilledCircle', [round(xs(i)) round(ys(i)) bus_radius], 'Color', 'white');
     end
 
     vw = VideoWriter(video, 'Motion JPEG AVI');
