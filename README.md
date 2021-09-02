@@ -2,7 +2,7 @@
 
 MATLAB 2D geographical visualization tool. It visualizes the data with geographical coordination on a 2D map and compiles the results into a **movie**.
 
-LTBVIS Lite is part of the [CURENT Large-Scale Testbed](https://github.com/CURENT/ltb).
+LTBVIS Lite is part of the [CURENT Large-Scale Testbed(LTB)](https://github.com/CURENT/ltb).
 
 ## Why LTBVIS Lite
 
