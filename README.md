@@ -48,6 +48,15 @@ You can get the map from:
 ### video
 The output will be a video file in avi format.
 
+## Tutorial
+In the LTBVIS Lite directory, run the command below:
+
+```
+createvideo('wecc_gps.csv', 'wecc_out.csv', 'worldmap.jpg', 'wecc.avi')
+```
+
+After the program finished, your video is prepared in the same directory.
+
 ## Function
 The main function is `createvide`, which takes five parameters.
 
@@ -59,17 +68,17 @@ createvideo(coords, visdata, map, video, plz)
 * `visdata`: string, visualized data csv file name.
 * `map`: string, base map file name.
 * `video`: string, output video file name.
+
+## Config
+Some parameters are stored in `config.mat`. You can modify it manually.
+
+* ``: 
 * `plz`: bool, parallelization enable.
 
-## Tutorial
-In the LTBVIS Lite directory, run the command below:
-
-```
-createvideo('wecc_gps.csv', 'wecc_out.csv', 'worldmap.jpg', 'wecc.avi', true)
-```
-
-After the program finished, your video is prepared in the same directory.
-(Due to the file size limitation, the map file is not uploaded here. You can get it from above link.)
+* `framerate = 30` fps (frames per second)
+* `padding = 100` Measured in pixels
+* `scale = 0.0002` data transformation range
+* `bus_radius = 3` bus point size, in pixels
 
 ## Citing LTB
 ```
