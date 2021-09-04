@@ -42,7 +42,7 @@ LTBVIS Lite runs on **MATLAB R2021a**.
 * The time stamp column should be named as *time*.
 
 ### default map
-You can get the map from:
+You can get the map source file from:
 <https://eoimages.gsfc.nasa.gov/images/imagerecords/73000/73751/world.topo.bathy.200407.3x21600x10800.jpg>
 
 ### video
@@ -72,13 +72,11 @@ createvideo(coords, visdata, map, video, plz)
 ## Config
 Some parameters are stored in `config.mat`. You can modify it manually.
 
-* ``: 
-* `plz`: bool, parallelization enable.
-
-* `framerate = 30` fps (frames per second)
-* `padding = 100` Measured in pixels
-* `scale = 0.0002` data transformation range
-* `bus_radius = 3` bus point size, in pixels
+* `framerate = 30` fps (frames per second).
+* `padding = 100` measured in pixels.
+* `scale = 0.0002` data transformation range.
+* `bus_radius = 3` bus point size, in pixels.
+* `plz = 1` parallelization enable.
 
 ## Citing LTB
 ```
