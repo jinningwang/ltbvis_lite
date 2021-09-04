@@ -86,4 +86,3 @@ Some parameters are stored in `config.mat`. You can modify it manually.
 
 ## Contributors
 [Nicholas West](https://github.com/TheHashTableSlasher), [Jinning Wang](https://github.com/jinningwang), [Hantao Cui](https://github.com/cuihantao), Can Huang, Fangxing Li.
-
