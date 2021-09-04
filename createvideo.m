@@ -1,4 +1,4 @@
-function createvideo(coords, visdata, map, video, plz)
+function createvideo(coords, visdata, map, video)
     %% program info
     % disp program info
     version = 'v1.1';
@@ -8,13 +8,18 @@ function createvideo(coords, visdata, map, video, plz)
     fprintf('\nCoordination data: [%s]\n', coords)
     fprintf('Visualized data: [%s]\n', visdata)
     fprintf('Map file: [%s]\n', map)
-    fprintf('Parallelization: [%s]\n', num2str(plz))
+    fprintf('Output file: [%s]\n', video)
 
-    framerate = 30; % fps (frames per second)
-    padding = 100; % Measured in pixels
-    scale = 0.0002; % data transformation range
-    bus_radius = 3; % in pixels
-
+    config_path = 'config.mat';
+    load(config_path);
+    fprintf('Load config from: [%s]\n', config_path)
+    
+    framerate = config.framerate; % fps (frames per second)
+    padding = config.padding; % Measured in pixels
+    scale = config.scale; % data transformation range
+    bus_radius = config.bus_radius; % in pixels
+    plz = config.plz; % parallazition enable
+    
     interpolate_timestamps = false;
     interpolate_method = 'natural';
     extrapolate_method = 'none';
