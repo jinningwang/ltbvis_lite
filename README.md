@@ -72,11 +72,13 @@ createvideo(coords, visdata, map, video)
 ## Config
 Some parameters are stored in `config.mat`. You can modify it manually.
 
-* `framerate = 30` fps (frames per second).
-* `padding = 100` measured in pixels.
-* `scale = 0.0002` data transformation range.
-* `bus_radius = 3` bus point size, in pixels.
-* `plz = 1` parallelization enable.
+| name       | default value | info                                       |
+|------------|---------------|--------------------------------------------|
+| framerate  | 30            | fps (frames per second).                   |
+| padding    | 100           | measured in pixels.                        |
+| scale      | 0.0002        | data transformation range.                 |
+| bus_radius | 3             | bus point size, in pixels.                 |
+| plz        | 1             | parallelization enable, set 0 to turn off. |
 
 ## Citing LTB
 ```
