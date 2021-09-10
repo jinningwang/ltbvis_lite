@@ -58,10 +58,10 @@ createvideo('wecc_gps.csv', 'wecc_out.csv', 'worldmap.jpg', 'wecc.avi')
 After the program finished, your video is prepared in the same directory.
 
 ## Function
-The main function is `createvide`, which takes five parameters.
+The main function is `createvide`, which takes four parameters.
 
 ```
-createvideo(coords, visdata, map, video, plz)
+createvideo(coords, visdata, map, video)
 ```
 
 * `coords`: string, sites coordination csv file name.
