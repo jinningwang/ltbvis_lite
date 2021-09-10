@@ -64,10 +64,12 @@ The main function is `createvide`, which takes four parameters.
 createvideo(coords, visdata, map, video)
 ```
 
-* `coords`: string, sites coordination csv file name.
-* `visdata`: string, visualized data csv file name.
-* `map`: string, base map file name.
-* `video`: string, output video file name.
+| name    | type   | info                         |
+|---------|--------|------------------------------|
+| coords  | string | sites coordination csv file. |
+| visdata | string | visualized data csv file.    |
+| map     | string | base map file.               |
+| video   | string | output video file.           |
 
 ## Config
 Some parameters are stored in `config.mat`. You can modify it manually.
@@ -79,6 +81,8 @@ Some parameters are stored in `config.mat`. You can modify it manually.
 | scale      | 0.0002        | data transformation range.                 |
 | bus_radius | 3             | bus point size, in pixels.                 |
 | plz        | 1             | parallelization enable, set 0 to turn off. |
+
+Parallelization can greatly accelerate the video compiling. If your device does not support parallelization, turn off `plz`.
 
 ## Citing LTB
 ```
