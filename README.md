@@ -6,9 +6,9 @@ LTBVIS Lite is part of the [CURENT Large-Scale Testbed(LTB)](https://github.com/
 
 ## Why LTBVIS Lite
 
-LTBVIS Lite is a **standalone** and **lightweight** visualization tool, as the alternative of [LTBVIS](https://github.com/CURENT/ltbvis).
+LTBVIS Lite is a **standalone** and **lightweight** visualization tool.
 
-With Lite, you can achieve simialr visualization without installing and running LTB.
+Lite is much easier to use.
 
 ## Installation
 
