@@ -8,8 +8,6 @@ LTBVIS Lite is part of the [CURENT Large-Scale Testbed(LTB)](https://github.com/
 
 LTBVIS Lite is a **standalone** and **lightweight** visualization tool.
 
-Lite is much easier to use.
-
 ## Installation
 
 LTBVIS Lite runs on **MATLAB R2021a**.
