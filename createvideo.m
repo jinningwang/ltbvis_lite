@@ -37,7 +37,12 @@ function createvideo(coords, visdata, map, video)
     borders = [];
 
     % Opacity of the countour layer
-    opacity = 0.75;
+    opacity = 0.9;
+
+    % Most extreme minimum/maximum values for the contour layer. Values
+    % above/below this range will be clamped to it in the final video.
+    contourmin = 0.9998;
+    contourmax = 1.0002;
 
     %% data info
     % read data
@@ -56,7 +61,7 @@ function createvideo(coords, visdata, map, video)
 
     frames = length(x);
 
-    cs = (Y - 1 + scale) / (2 * scale);
+    cs = (Y - contourmin) / (contourmax - contourmin);
     xs = gpstable{:, 'xcoord'};
     ys = gpstable{:, 'ycoord'};
 
