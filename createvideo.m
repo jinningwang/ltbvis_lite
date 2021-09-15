@@ -13,17 +13,31 @@ function createvideo(coords, visdata, map, video)
     config_path = 'config.mat';
     load(config_path);
     fprintf('Load config from: [%s]\n', config_path)
-    
+
     framerate = config.framerate; % fps (frames per second)
-    padding = config.padding; % Measured in pixels
+    %padding = config.padding; % Measured in pixels
     scale = config.scale; % data transformation range
     bus_radius = config.bus_radius; % in pixels
     plz = config.plz; % parallazition enable
-    
+
     interpolate_timestamps = false;
     interpolate_method = 'natural';
     extrapolate_method = 'none';
     max_resolution = [720 1280];
+
+    % Amount of padding between the video's borders and the minimum/maximum
+    % buses, in units of latitude/longitude, going from top, to right, to
+    % bottom, to left. Either use this, or make it an empty matrix and use
+    % borders instead.
+    padding = [10 10 10 10];
+
+    % Absolute borders of the video, in units of latitude/longitude, going
+    % from top, to right, to bottom, to left. Either use this, or make it an
+    % empty matrix and use padding instead.
+    borders = [];
+
+    % Opacity of the countour layer
+    opacity = 0.75;
 
     %% data info
     % read data
@@ -35,7 +49,7 @@ function createvideo(coords, visdata, map, video)
     Y = outtable{:, gpstable{:, 'name'}}';
 
     if interpolate_timestamps
-        xx = (x(1)* framerate):(1 / framerate):x(length(x));
+        xx = x(1):(1 / framerate):x(length(x));
         Y = spline(x, Y, xx);
         x = xx;
     end
@@ -50,17 +64,31 @@ function createvideo(coords, visdata, map, video)
     fprintf('\nData info\n')
     fprintf('There are %s sites, and %s time stamps.\n', num2str(size(xs, 1)), num2str(size(x, 1)))
 
-    %% calcualtion
+    %% calculation
     worldmap = imread(map);
     [height, width, ~] = size(worldmap);
 
+    if ~isempty(padding)
+        xmin = min(xs) - padding(4);
+        xmax = max(xs) + padding(2);
+        ymin = max(ys) + padding(1);
+        ymax = min(ys) - padding(3);
+    elseif ~isempty(borders)
+        xmin = borders(4);
+        xmax = borders(2);
+        ymin = borders(1);
+        ymax = borders(3);
+    else
+        fprintf('Error: padding and borders can''t both be empty!\n');
+        return
+    end
+
     xs = (xs + 180) * (width / 360);
     ys = (-ys + 90) * (height / 180);
-
-    xmin = round(min(xs) - padding);
-    xmax = round(max(xs) + padding);
-    ymin = round(min(ys) - padding);
-    ymax = round(max(ys) + padding);
+    xmin = min(max(round((xmin + 180) * (width / 360)), 1), width);
+    xmax = min(max(round((xmax + 180) * (width / 360)), 1), width);
+    ymin = min(max(round((-ymin + 90) * (width / 360)), 1), height);
+    ymax = min(max(round((-ymax + 90) * (width / 360)), 1), height);
 
     worldmap = worldmap(ymin:ymax, xmin:xmax, :);
     [height, width, ~] = size(worldmap);
@@ -121,7 +149,7 @@ function createvideo(coords, visdata, map, video)
         frame(frame < 0) = 0;
         frame(isnan(frame)) = 0.5;
 
-        blend.Opacity = abs(frame - 0.5) * 0.75;
+        blend.Opacity = abs(frame - 0.5) * 2 * opacity;
 
         frame = im2uint8(ind2rgb(im2uint8(frame), jet));
         frame = blend(worldmap, frame);
