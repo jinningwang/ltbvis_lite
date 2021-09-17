@@ -29,12 +29,13 @@ function createvideo(coords, visdata, map, video)
     % buses, in units of latitude/longitude, going from top, to right, to
     % bottom, to left. Either use this, or make it an empty matrix and use
     % borders instead.
-    padding = [10 10 10 10];
+    %padding = [10 10 10 10];
+    padding = [];
 
     % Absolute borders of the video, in units of latitude/longitude, going
     % from top, to right, to bottom, to left. Either use this, or make it an
     % empty matrix and use padding instead.
-    borders = [];
+    borders = [47.455 -66.8628 24.3959 -124.8679];
 
     % Opacity of the countour layer
     opacity = 0.9;
