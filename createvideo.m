@@ -1,7 +1,7 @@
 function createvideo(coords, visdata, map, video)
     %% program info
     % disp program info
-    version = 'v1.1';
+    version = 'v1.2';
     fprintf('LTBVIS Lite \nVersion: [%s]\n', version)
 
     % disp I/O info
@@ -14,36 +14,51 @@ function createvideo(coords, visdata, map, video)
     load(config_path);
     fprintf('Load config from: [%s]\n', config_path)
 
-    framerate = config.framerate; % fps (frames per second)
-    %padding = config.padding; % Measured in pixels
-    scale = config.scale; % data transformation range
-    bus_radius = config.bus_radius; % in pixels
-    plz = config.plz; % parallazition enable
+    framerate = config.framerate;                          % fps (frames per second)
+    scale = config.scale;                                        % data transformation range
+    bus_radius = config.bus_radius;                     % in pixels
+    plz = config.plz;                                              % parallazition enable
+    area_en = config.area_en;                                % user selected area enable
 
     interpolate_timestamps = false;
     interpolate_method = 'natural';
     extrapolate_method = 'none';
     max_resolution = [720 1280];
 
+    % check configure consistancy
+    if area_en 
+        if isempty(config.borders)
+            msg1 = 'User selected area is enabled, but no area coordination is given!';
+            error(msg1);
+        end
+
+        if (size(config.borders, 1) ~= 1 || size(config.borders, 2) ~= 4)
+            msg2 = 'Area coordination format is wrong! Please input a 1 by 4 array.';
+            error(msg2);
+        end
+        
+        padding = [];
+        borders = config.borders;
+        fprintf('Focus area is user selected.\n')
+        
+    else
+        fprintf('Focus area is auto selected.\n')
+        padding = [10 10 10 10];
+        borders = [];
+    end
+    
+    
     % Amount of padding between the video's borders and the minimum/maximum
     % buses, in units of latitude/longitude, going from top, to right, to
     % bottom, to left. Either use this, or make it an empty matrix and use
     % borders instead.
-    %padding = [10 10 10 10];
-    padding = [];
 
     % Absolute borders of the video, in units of latitude/longitude, going
     % from top, to right, to bottom, to left. Either use this, or make it an
     % empty matrix and use padding instead.
-    borders = [49.0027 -66.8628 24.3959 -124.8679];
-
+    
     % Opacity of the countour layer
     opacity = 0.9;
-
-    % Most extreme minimum/maximum values for the contour layer. Values
-    % above/below this range will be clamped to it in the final video.
-    contourmin = 0.9998;
-    contourmax = 1.0002;
 
     %% data info
     % read data
@@ -54,6 +69,11 @@ function createvideo(coords, visdata, map, video)
     x = outtable{:, 'time'};
     Y = outtable{:, gpstable{:, 'name'}}';
 
+    % Most extreme minimum/maximum values for the contour layer. Values
+    % above/below this range will be clamped to it in the final video.
+    contourmin = config.data_min;
+    contourmax = config.data_max;
+    
     if interpolate_timestamps
         xx = x(1):(1 / framerate):x(length(x));
         Y = spline(x, Y, xx);
