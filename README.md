@@ -46,6 +46,10 @@ You can get the map source file from:
 ### video
 The output will be a video file in avi format.
 
+### data transformation and color setting
+The input data is linearly transformed between `data_max` and `data_min`.
+`data_max` will be colored as extreme blue, and `data_min` will be colored as extreme red. The mean value of `data_max` and `data_min` will be transparent.
+
 ## Tutorial
 In the LTBVIS Lite directory, run the command below:
 
