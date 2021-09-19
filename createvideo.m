@@ -43,7 +43,7 @@ function createvideo(coords, visdata, map, video)
         
     else
         fprintf('Focus area is auto selected.\n')
-        padding = [10 10 10 10];
+        padding = config.padding;
         borders = [];
     end
     
