@@ -76,18 +76,18 @@ createvideo(coords, visdata, map, video)
 ## Config
 Some parameters are stored in `config.mat`. You can modify it manually.
 
-| name       | default value                        | info                                                  |
-|------------|--------------------------------------|-------------------------------------------------------|
-| framerate  | 30                                   | fps (frames per second).                              |
-| padding    | 100                                  | measured in pixels.                                   |
-| scale      | 0.0002                               | data transformation range.                            |
-| bus_radius | 3                                    | bus point size, in pixels.                            |
-| plz        | 1                                    | parallelization enable, set 0 to turn off.            |
-| data_max   | 1.0002                               | maximum line of visualized data.                      |
-| data_min   | 0.9998                               | minimum line of visualized data.                      |
-| area_en    | 0                                    | enable for user selected focus area, set 1 to turn on.|
-| borders    | [47.4550 -66.8628 24.3959 -124.8679] | user selected area coords.                            |
-| padding    | [1 1 1 1]                            | auto selected area zone.                              |
+| name       | default value                           | info                                                  |
+|------------|-----------------------------------------|-------------------------------------------------------|
+| framerate  | 30                                      | fps (frames per second).                              |
+| padding    | 100                                     | measured in pixels.                                   |
+| scale      | 0.0002                                  | data transformation range.                            |
+| bus_radius | 3                                       | bus point size, in pixels.                            |
+| plz        | 1                                       | parallelization enable, set 0 to turn off.            |
+| data_max   | 1.0002                                  | maximum line of visualized data.                      |
+| data_min   | 0.9998                                  | minimum line of visualized data.                      |
+| area_en    | 0                                       | enable for user selected focus area, set 1 to turn on.|
+| borders    | [47.4550, -66.8628, 24.3959, -124.8679] | user selected area coords.                            |
+| padding    | [2, 2, 2, 2]                            | auto selected area zone.                              |
 
 * Parallelization can greatly accelerate the video compiling. If your device does not support parallelization, turn off `plz`.
 * Make sure `borders` are correctly assigned if `area_en` is enabled.
