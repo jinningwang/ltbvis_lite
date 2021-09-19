@@ -67,7 +67,7 @@ createvideo(coords, visdata, map, video)
 ```
 
 | name    | type   | info                         |
-|---------|--------|------------------------------|
+|:--------|:-------|:-----------------------------|
 | coords  | string | sites coordination csv file. |
 | visdata | string | visualized data csv file.    |
 | map     | string | base map file.               |
@@ -77,7 +77,7 @@ createvideo(coords, visdata, map, video)
 Some parameters are stored in `config.mat`. You can modify it manually.
 
 | name       | default value                           | info                                                  |
-|------------|-----------------------------------------|-------------------------------------------------------|
+|:-----------|:----------------------------------------|:------------------------------------------------------|
 | framerate  | 30                                      | fps (frames per second).                              |
 | padding    | 100                                     | measured in pixels.                                   |
 | scale      | 0.0002                                  | data transformation range.                            |
