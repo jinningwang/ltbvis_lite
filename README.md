@@ -87,9 +87,11 @@ Some parameters are stored in `config.mat`. You can modify it manually.
 | data_min   | 0.9998                               | minimum line of visualized data.                      |
 | area_en    | 0                                    | enable for user selected focus area, set 1 to turn on.|
 | borders    | [47.4550 -66.8628 24.3959 -124.8679] | user selected area coords.                            |
+| padding    | [1 1 1 1]                            | auto selected area zone.                              |
 
 * Parallelization can greatly accelerate the video compiling. If your device does not support parallelization, turn off `plz`.
 * Make sure `borders` are correctly assigned if `area_en` is enabled.
+* When auto selected are is enabled, you can increase the focus area by modify padding.
 
 ## Citing LTB
 ```
