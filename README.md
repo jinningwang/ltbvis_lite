@@ -76,6 +76,8 @@ createvideo(coords, visdata, map, video)
 ## Config
 Some parameters are stored in `config.mat`. You can modify it manually.
 
+**Save the config into config.mat if you make any change of the default configuration, or the new seetings will not take effect.**
+
 | name       | default value                           | info                                                  |
 |:-----------|:----------------------------------------|:------------------------------------------------------|
 | framerate  | 30                                      | fps (frames per second).                              |
@@ -91,7 +93,8 @@ Some parameters are stored in `config.mat`. You can modify it manually.
 
 * Parallelization can greatly accelerate the video compiling. If your device does not support parallelization, turn off `plz`.
 * Make sure `borders` are correctly assigned if `area_en` is enabled.
-* When auto selected are is enabled, you can increase the focus area by modify padding.
+* When auto selected area is enabled, you can increase the focus area by modify padding.
+* When user selected area is enabled, input top longitude, left latitude, bottom longitude, right latitude into `config.borders`.
 
 ## Citing LTB
 ```
