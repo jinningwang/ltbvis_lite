@@ -59,6 +59,20 @@ function createvideo(coords, visdata, map, video)
     
     % Opacity of the countour layer
     opacity = 0.9;
+    
+    % Infer encoding method from file extension
+    [~, ~, ext] = fileparts(video);
+    
+    if strcmp(ext, '.avi')
+        video_encoding = 'Motion JPEG AVI';
+    elseif strcmp(ext, '.mp4')
+        video_encoding = 'MPEG-4';
+    elseif strcmp(ext, '.mj2')
+        video_encoding = 'Motion JPEG 2000';
+    else
+        fprintf('Error: %s does not have a recognized file extension\n', video);
+        return;
+    end
 
     %% data info
     % read data
@@ -139,7 +153,7 @@ function createvideo(coords, visdata, map, video)
         worldmap = insertShape(worldmap, 'FilledCircle', [round(xs(i)) round(ys(i)) bus_radius], 'Color', 'white');
     end
 
-    vw = VideoWriter(video, 'Motion JPEG AVI');
+    vw = VideoWriter(video, video_encoding);
     vw.FrameRate = framerate;
     open(vw);
 
