@@ -1,5 +1,9 @@
 classdef VideoRenderer < handle
     properties
+        coords_file = []
+        visdata_file = []
+        map_file = []
+
         data_min = 0.9998
         data_max = 1.0002
         opacity = 0.9
@@ -15,17 +19,16 @@ classdef VideoRenderer < handle
         bus_radius = 3
 
         parallelize = true
+    end
 
-        coords_file = []
-        visdata_file = []
-        map_file = []
+    properties(SetAccess = private, GetAccess = public)
+        frames
     end
 
     properties (Access = private)
         xs
         ys
         cs
-        frames
         map_img
         interp
         blend
@@ -43,10 +46,10 @@ classdef VideoRenderer < handle
             visdata_table = readtable(this.visdata_file, 'VariableNamingRule', 'preserve');
             visdata_table = sortrows(visdata_table, 'time'); % sort the data by time
 
-            x = coords_table{:, 'time'};
+            x = visdata_table{:, 'time'};
             Y = visdata_table{:, coords_table{:, 'name'}}';
 
-            if self.interpolate_timestamps
+            if this.interpolate_timestamps
                 xx = x(1):(1 / this.framerate):x(length(x));
                 Y = spline(x, Y, xx);
                 x = xx;
@@ -136,7 +139,7 @@ classdef VideoRenderer < handle
             %frame = imfuse(worldmap, frame, 'blend');
         end
 
-        function genvideo(this, video_file)
+        function genvideo(this, video_file, pbar)
             % Infer encoding method from file extension
             [~, ~, ext] = fileparts(video_file);
 
@@ -154,11 +157,28 @@ classdef VideoRenderer < handle
             vw.FrameRate = this.framerate;
             open(vw);
 
+            if nargin < 3
+                pbar = false
+            end
+
+            if pbar
+                bar = waitbar(0, 'Generating video...');
+            end
+
             for k = 1:this.frames
+                if pbar
+                    str = ['Generating video... ' num2str(fix(100 * k / this.frames)) '%'];
+                    waitbar(k / this.frames, bar, str);
+                end
+
                 writeVideo(vw, genframe(this, k));
             end
 
             close(vw);
+
+            if pbar
+                close(bar);
+            end
         end
     end
 end
